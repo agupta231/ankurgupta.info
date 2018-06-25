@@ -1,15 +1,29 @@
+body {
+	background-color: #fefefe;
+	color: #454545;
+}
 .nav a {
 	color: gray;
 	text-decoration: none;
 }
+.nav a:hover {
+	color: blue;
+}
 .nav h2,
 .nav p {
-    display: inline;
-    vertical-align : top;
+	display: inline;
 }
 .nav h2 {
-    font-family: "Courier New", Courier, monospace;
+	font-family: "Courier New", Courier, monospace;
 }
 .nav img {
-    float: right;
+	float: right;
 }
+#container {
+	margin: 2em auto;
+	max-width: 1000px;
+	padding: 1em;
+	line-height: 1.4;
+	text-align: justify;
+}
+
