@@ -1,7 +1,11 @@
 .nav a {
 	color: gray;
 	text-decoration: none;
+}
+.nav h2,
+.nav p {
     display: inline;
+    vertical-align : top;
 }
 .nav h2 {
     font-family: "Courier New", Courier, monospace;
