@@ -1,5 +1,8 @@
-a {
+.nav a {
 	color: gray;
 	text-decoration: none;
+    display: inline;
 }
-
+.nav h2 {
+    font-family: "Courier New", Courier, monospace;
+}
