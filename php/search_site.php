@@ -1,6 +1,7 @@
 <?php
 
-$db_file = "/res/posts_db.json"
+print(phpinfo());
+$db_file = "/res/posts_db.json";
 
 # Thank you to https://stackoverflow.com/questions/828870/php-regex-how-to-get-
 # the-string-value-of-html-tag for the code snippet.
@@ -27,9 +28,9 @@ function updateDatabase() {
     $current_post_meta = array();
     $post_buffer = file_get_contents($post);
     
-    $title = getTextBetweenTags($post_buffer, "title").explode(" | ")[0];
+    $title = explode(" | ", getTextBetweenTags($post_buffer, "title"))[0];
     $date = getTextBetweenTags($post_buffer, "date");
-    $tags = getTextBetweenTags($post_buffer, "tags").explode(",");
+    $tags = explode(",", getTextBetweenTags($post_buffer, "tags"));
 
     $current_post_meta['title'] = $title;
     $current_post_meta['tags'] = $tags;
@@ -56,25 +57,23 @@ function updateDatabase() {
 }
 
 ## Begin search script
-
-$keystring = $_POST['keystring'];
-$keytag = $_POST['keytags'];
-
-$db_data = "none";
-
-if (file_exists($db_file)) {
-  $db_data_raw = file_get_contents($db_file);
-  $db_data = json_decode($db_file);
-
-  if ($db_data['lastUpdate'] != 
-      shell_exec("ls -l /html/dynamic/ | grep posts | awk '{print $6 $7 $8}'")) {
-
-    $db_data = updateDatabase();
-  }
-} else {
-    $db_data = updateDatabase();
-}
-
-$fh = fopen("log.log", "w") or die("Can't open log file");
-fwrite($fh, json_encode($db_data));
-fclose($fh);
+# 
+# $keystring = $_POST['keystring'];
+# $keytag = $_POST['keytags'];
+# 
+# $db_data = "none";
+# 
+# if (file_exists($db_file)) {
+#   $db_data_raw = file_get_contents($db_file);
+#   $db_data = json_decode($db_file);
+# 
+#   if ($db_data['lastUpdate'] != 
+#       shell_exec("ls -l /html/dynamic/ | grep posts | awk '{print $6 $7 $8}'")) {
+# 
+#     $db_data = updateDatabase();
+#   }
+# } else {
+#     $db_data = updateDatabase();
+# }
+# 
+# echo(json_encode($db_data));
