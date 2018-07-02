@@ -12,7 +12,7 @@ function getTextBetweenTags($string, $tagname) {
   return $matches[1];
 }
 
-function updateDatabase() {
+function updateDatabase($db_file) {
   # Create array which is the database
   $database = array();
 
@@ -28,7 +28,9 @@ function updateDatabase() {
     $current_post_meta = array();
     $post_buffer = file_get_contents($post);
     
-    $title = explode(" | ", getTextBetweenTags($post_buffer, "title"))[0];
+    $titles_arr = explode(" | ", getTextBetweenTags($post_buffer, "title"));
+    $title = $titles_arr[0];
+
     $date = getTextBetweenTags($post_buffer, "date");
     $tags = explode(",", getTextBetweenTags($post_buffer, "tags"));
 
@@ -57,23 +59,23 @@ function updateDatabase() {
 }
 
 ## Begin search script
-# 
-# $keystring = $_POST['keystring'];
-# $keytag = $_POST['keytags'];
-# 
-# $db_data = "none";
-# 
-# if (file_exists($db_file)) {
-#   $db_data_raw = file_get_contents($db_file);
-#   $db_data = json_decode($db_file);
-# 
-#   if ($db_data['lastUpdate'] != 
-#       shell_exec("ls -l /html/dynamic/ | grep posts | awk '{print $6 $7 $8}'")) {
-# 
-#     $db_data = updateDatabase();
-#   }
-# } else {
-#     $db_data = updateDatabase();
-# }
-# 
-# echo(json_encode($db_data));
+
+$keystring = $_POST['keystring'];
+$keytag = $_POST['keytags'];
+
+$db_data = "none";
+
+if (file_exists($db_file)) {
+  $db_data_raw = file_get_contents($db_file);
+  $db_data = json_decode($db_file);
+
+  if ($db_data['lastUpdate'] !=
+      shell_exec("ls -l /html/dynamic/ | grep posts | awk '{print $6 $7 $8}'")) {
+
+    $db_data = updateDatabase($db_file);
+  }
+} else {
+    $db_data = updateDatabase($db_file);
+}
+
+echo(json_encode($db_data));
