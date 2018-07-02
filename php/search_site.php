@@ -28,10 +28,12 @@ function updateDatabase() {
     $post_buffer = file_get_contents($post);
     
     $title = getTextBetweenTags($post_buffer, "title").explode(" | ")[0];
+    $date = getTextBetweenTags($post_buffer, "date");
     $tags = getTextBetweenTags($post_buffer, "tags").explode(",");
 
     $current_post_meta['title'] = $title;
     $current_post_meta['tags'] = $tags;
+    $current_post_meta['date'] = $date;
 
     foreach ($tags as $tag) {
       if (array_key_exists($tag, $current_post_meta['tags'])) {
@@ -53,18 +55,26 @@ function updateDatabase() {
   return $database;
 }
 
+## Begin search script
+
 $keystring = $_POST['keystring'];
 $keytag = $_POST['keytags'];
+
+$db_data = "none";
 
 if (file_exists($db_file)) {
   $db_data_raw = file_get_contents($db_file);
   $db_data = json_decode($db_file);
 
   if ($db_data['lastUpdate'] != 
-    shell_exec("ls -l /html/dynamic/ | grep posts | awk '{print $6 $7 $8}'")) {
+      shell_exec("ls -l /html/dynamic/ | grep posts | awk '{print $6 $7 $8}'")) {
 
-    updateDatabase();
+    $db_data = updateDatabase();
   }
 } else {
-    updateDatabase();
+    $db_data = updateDatabase();
 }
+
+$fh = fopen("log.log", "w") or die("Can't open log file");
+fwrite($fh, json_encode($db_data));
+fclose($fh);
