@@ -40,12 +40,10 @@ function updateDatabase($db_file) {
     $current_post_meta['link'] = $post;
 
     foreach ($tags as $tag) {
-      if (array_key_exists($tag, $current_post_meta['tags'])) {
-        $current_post_meta['tags'][$tag] += 1;
-        print("her");
+      if (array_key_exists($tag, $database['tags'])) {
+        $database['tags'][$tag] += 1;
       } else {
-        $current_post_meta['tags'][$tag] = 1;
-        print("here");
+        $database['tags'][$tag] = 1;
       }
     }
 
