@@ -20,7 +20,7 @@ function loadResults() {
 }
 
 function displayResults(xhttp) {
-	alert(xhttp.responseText);
+	console.log(xhttp.responseText);
 }
 
 loadResults();

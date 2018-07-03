@@ -1,6 +1,4 @@
 <?php
-
-print(phpinfo());
 $db_file = $_SERVER['DOCUMENT_ROOT'] . "/res/posts_db.json";
 
 # Thank you to https://stackoverflow.com/questions/828870/php-regex-how-to-get-
