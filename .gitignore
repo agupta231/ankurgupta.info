@@ -3,4 +3,4 @@
 *robots.txt
 *.DS_Store
 *.idea
-res/*
+*res*
