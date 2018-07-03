@@ -71,7 +71,9 @@ if (file_exists($db_file)) {
   $db_data = json_decode($db_file);
 
   if ($db_data['lastUpdate'] !=
-      shell_exec("ls -l " . $_SERVER['DOCUMENT_ROOT'] . "/html/dynamic/ | grep posts | awk '{print $6 $7 $8}'")) {
+      shell_exec("ls -l " . 
+      $_SERVER['DOCUMENT_ROOT'] . 
+      "/html/dynamic/ | grep posts | awk '{print $6 $7 $8}'")) {
 
     $db_data = updateDatabase($db_file);
   }
