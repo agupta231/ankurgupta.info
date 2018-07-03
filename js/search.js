@@ -21,6 +21,11 @@ function loadResults() {
 
 function displayResults(xhttp) {
 	console.log(xhttp.responseText);
+
+	let posts_meta = JSON.parse(xhttp.responseText);
+	let posts = posts_meta.posts.map(post => "<a href='" + post.link + "'><p>" + post.title + "</p></a>");
+
+	document.getElementById("search_results").innerHTML = posts.join();
 }
 
 loadResults();
