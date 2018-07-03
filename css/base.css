@@ -20,6 +20,11 @@ body {
 .nav img {
 	float: right;
 }
+
+.hidden {
+	display: none;
+}
+
 #container {
 	margin: 2em auto;
 	max-width: 800px;

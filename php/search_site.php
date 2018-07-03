@@ -37,7 +37,9 @@ function updateDatabase($db_file) {
     $current_post_meta['title'] = $title;
     $current_post_meta['tags'] = $tags;
     $current_post_meta['date'] = $date;
-    $current_post_meta['link'] = $post;
+
+    $links_arr = explode("production", $post);
+    $current_post_meta['link'] = $links_arr[1];
 
     foreach ($tags as $tag) {
       if (array_key_exists($tag, $database['tags'])) {
