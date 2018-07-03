@@ -37,6 +37,7 @@ function updateDatabase($db_file) {
     $current_post_meta['title'] = $title;
     $current_post_meta['tags'] = $tags;
     $current_post_meta['date'] = $date;
+    $current_post_meta['link'] = $post;
 
     foreach ($tags as $tag) {
       if (array_key_exists($tag, $current_post_meta['tags'])) {
