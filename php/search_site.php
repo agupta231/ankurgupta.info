@@ -46,7 +46,7 @@ function updateDatabase($db_file) {
       }
     }
 
-    $database['posts'].append($current_post_meta);
+    array_push($database['posts'], $current_post_meta);
   }
 
   arsort($database['tags']);
