@@ -18,7 +18,9 @@ function updateDatabase($db_file) {
 
   # Fill in the "hash"... basically prevents this function if no new data has been added
   $database['lastUpdate'] = 
-    shell_exec("ls -l " . $_SERVER['DOCUMENT_ROOT'] . "/html/dynamic/ | grep posts | awk '{print $6 $7 $8}'");
+    shell_exec("ls -l " . 
+               $_SERVER['DOCUMENT_ROOT'] . 
+               "/html/dynamic/ | grep posts | awk '{print $6 $7 $8}'");
 
   $database['posts'] = array();
   $database['tags'] = array();
