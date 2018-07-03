@@ -41,8 +41,10 @@ function updateDatabase($db_file) {
     foreach ($tags as $tag) {
       if (array_key_exists($tag, $current_post_meta['tags'])) {
         $current_post_meta['tags'][$tag] += 1;
+        print("her");
       } else {
         $current_post_meta['tags'][$tag] = 1;
+        print("here");
       }
     }
 
